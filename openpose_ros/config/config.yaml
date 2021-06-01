@@ -1,10 +1,10 @@
 openpose_ros_node:
     ros__parameters:
-        image_topic: "/camera/image"
+        image_topic: "/image"
         input_image_transport_type: "raw"
         output_topic: "/openpose_ros/human_list"
-        display_output: false
-        print_keypoints: false
+        display_output: true
+        print_keypoints: true
         save_original_video: false
         save_openpose_video: false
         original_video_file_name: "original_video_output.avi"
