@@ -33,14 +33,14 @@ DEFINE_int32(keypoint_scale, 0, "Scaling of the (x,y) coordinates of the final p
                                 " corner of the image, and (1,1) the bottom-right one; and 4 for range [-1,1], where"
                                 " (-1,-1) would be the top-left corner of the image, and (1,1) the bottom-right one. Non"
                                 " related with `scale_number` and `scale_gap`.");
-DEFINE_int32(number_people_max, 1, "This parameter will limit the maximum number of people detected, by keeping the people with"
+DEFINE_int32(number_people_max, 2, "This parameter will limit the maximum number of people detected, by keeping the people with"
                                    " top scores. The score is based in person area over the image, body part score, as well as"
                                    " joint score (between each pair of connected body parts). Useful if you know the exact"
                                    " number of people in the scene, so it can remove false positives (if all the people have"
                                    " been detected. However, it might also include false negatives by removing very small or"
                                    " highly occluded people. -1 will keep them all.");
-DEFINE_bool(maximize_positives, false, "It reduces the thresholds to accept a person candidate. It highly increases both false and"
-                                       " true positives. I.e., it maximizes average recall but could harm average precision.");
+DEFINE_bool(maximize_positives, true, "It reduces the thresholds to accept a person candidate. It highly increases both false and"
+                                      " true positives. I.e., it maximizes average recall but could harm average precision.");
 DEFINE_double(fps_max, -1, "Maximum processing frame rate. By default (-1), OpenPose will process frames as fast as"
                            " possible. Example usage: If OpenPose is displaying images too quickly, this can reduce"
                            " the speed so the user can analyze better each frame from the GUI.");
@@ -125,10 +125,10 @@ DEFINE_int32(3d_views, -1, "Complementary option for `--image_dir` or `--video`.
                            " parameter folder as this number indicates.");
 // Extra algorithms
 DEFINE_bool(identification, false, "Experimental, not available yet. Whether to enable people identification across frames.");
-DEFINE_int32(tracking, 5, "Experimental, not available yet. Whether to enable people tracking across frames. The"
-                          " value indicates the number of frames where tracking is run between each OpenPose keypoint"
-                          " detection. Select -1 (default) to disable it or 0 to run simultaneously OpenPose keypoint"
-                          " detector and tracking for potentially higher accurary than only OpenPose.");
+DEFINE_int32(tracking, -1, "Experimental, not available yet. Whether to enable people tracking across frames. The"
+                           " value indicates the number of frames where tracking is run between each OpenPose keypoint"
+                           " detection. Select -1 (default) to disable it or 0 to run simultaneously OpenPose keypoint"
+                           " detector and tracking for potentially higher accurary than only OpenPose.");
 DEFINE_int32(ik_threads, 0, "Experimental, not available yet. Whether to enable inverse kinematics (IK) from 3-D"
                             " keypoints to obtain 3-D joint angles. By default (0 threads), it is disabled. Increasing"
                             " the number of threads will increase the speed but also the global system latency.");
@@ -172,9 +172,9 @@ DEFINE_double(hand_alpha_heatmap, 0.7, "Analogous to `alpha_heatmap` but applied
 DEFINE_bool(fullscreen, false, "Run in full-screen mode (press f during runtime to toggle).");
 DEFINE_bool(no_gui_verbose, true, "Do not write text on output images on GUI (e.g., number of current frame and people). It"
                                   " does not affect the pose rendering.");
-DEFINE_int32(display, -1, "Display mode: -1 for automatic selection; 0 for no display (useful if there is no X server"
-                          " and/or to slightly speed up the processing if visual output is not required); 2 for 2-D"
-                          " display; 3 for 3-D display (if `--3d` enabled); and 1 for both 2-D and 3-D display.");
+DEFINE_int32(display, 0, "Display mode: -1 for automatic selection; 0 for no display (useful if there is no X server"
+                         " and/or to slightly speed up the processing if visual output is not required); 2 for 2-D"
+                         " display; 3 for 3-D display (if `--3d` enabled); and 1 for both 2-D and 3-D display.");
 #endif // OPENPOSE_FLAGS_DISABLE_DISPLAY
 // Command Line Interface Verbose
 DEFINE_double(cli_verbose, -1.f, "If -1, it will be disabled (default). If it is a positive integer number, it will print on"
